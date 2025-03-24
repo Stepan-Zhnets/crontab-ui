@@ -12,7 +12,11 @@ git clone https://github.com/Stepan-Zhnets/crontab-ui.git
 
 # Запуск
 
-Чтобы запустить проект, вам необходимо запустить скрипт: `start.sh`
+Чтобы запустить проект, вам необходимо запустить скрипт `start.sh`, через команду:
+
+``` bash
+bash start.sh
+```
 
 Этот скрипт запустит установку менеджера пакетов Python UV и запустит проект, установив необходимые зависимости.
 
@@ -23,7 +27,7 @@ git clone https://github.com/Stepan-Zhnets/crontab-ui.git
 echo "Установка UV..."
 curl -sSLf https://astral.sh/uv/install.sh | sh
 
-# Checking for uv
+# Проверка на наличие UV
 if ! command -v uv &>/dev/null; then
     echo "Error! UV is not set."
     exit 1
@@ -33,4 +37,3 @@ fi
 echo "Запуск main.py..."
 uv run main.py
 ```
-
