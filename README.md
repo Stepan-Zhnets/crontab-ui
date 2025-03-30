@@ -1,4 +1,4 @@
-Enter in: [README-RU](./README-RU.md )
+Enter in: [README-RU](./README-RU.md)
 
 # crontab-ui
 
@@ -6,7 +6,7 @@ crontab-ui is a user-defined program with a graphical shell that provides the ab
 
 # Installation
 
-``` bash
+```bash
 git clone https://github.com/Stepan-Zhnets/crontab-ui.git
 ```
 
@@ -16,7 +16,7 @@ To run the project, you need to run the script: `start.sh `
 
 This script will run the installation of the Python UV package manager and run the project, installing the necessary dependencies.
 
-``` bash
+```bash
 #!/bin/bash
 
 # UV installation
@@ -25,8 +25,8 @@ curl -sSLf https://astral.sh/uv/install.sh | sh
 
 # Checking for uv
 if ! command -v uv &>/dev/null; then
- echo "Error! UV is not set."
- exit 1
+  echo "Error! UV is not set."
+  exit 1
 fi
 
 # Program launch

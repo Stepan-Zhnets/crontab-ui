@@ -12,7 +12,7 @@ def check_job(name):
 def create_job(name, date, command):
     with CronTab(user=user) as cron:
         job = cron.new(command=command, comment=name)
-        
+
         # Разбираем дату на компоненты и устанавливаем соответствующие значения для задачи
         minute, hour, day_of_month, month, day_of_week = date.split()
         job.minute.on(int(minute))

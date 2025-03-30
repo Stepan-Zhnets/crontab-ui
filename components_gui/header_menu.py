@@ -1,24 +1,14 @@
-from tkinter import ttk
+import flet as ft
 
-from components_gui.windows.create_job import menu_create_job
+def show_create_job_dialog():...
 
+def header_menu(page: ft.Page):
+    frame = ft.Row(spacing=10)
 
-def header_menu():
-    frame = ttk.Frame(borderwidth=1,
-                        relief='solid',
-                        padding=[2, 1]
-                    )
+    btn_new_job = ft.ElevatedButton(
+        text="new job",
+        on_click=lambda e: show_create_job_dialog(e, page)
+    )
 
-
-    btn_new_job = ttk.Button(frame,
-                            text="new job",
-                            command=menu_create_job
-                            )
-    btn_new_job.grid(
-        # ipadx=3, ipady=2,
-        padx=1, pady=1
-        )
-
-    frame.grid(
-        padx=1, pady=1
-        )
+    frame.controls.append(btn_new_job)
+    page.add(frame)
