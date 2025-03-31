@@ -40,6 +40,7 @@ def header_menu(page: ft.Page):
 
     def handle_close(e):
         page.close(create_new_job)
+        page.update()
 
     def create(e):
         # Check if a special command is set
@@ -55,6 +56,7 @@ def header_menu(page: ft.Page):
             return
 
         print(f'{name_job.value}, {command_job.value}, {data_job}')
+        page.update()
         page.close(create_new_job)
 
     # Всплывающее окно

@@ -24,6 +24,12 @@ from cron_tools import delete_job, get_jobs
 # Данные из CronTab
 list_jobs = get_jobs()
 
+
+
+def delete_and_refresh(page, job_name):
+    delete_job(name=job_name)
+    page.update()
+
 # Главная страница
 def main(page: ft.Page):
     page.title = "crontab ui"
@@ -40,6 +46,9 @@ def main(page: ft.Page):
         ft.DataColumn(ft.Text("Actions"))
     ]
 
+    def delete(value):
+        delete_job(name=value)
+
     num=0
     rows = []
     for job in list_jobs:
@@ -48,19 +57,16 @@ def main(page: ft.Page):
             controls=[
                 ft.IconButton(
                     icon=ft.icons.EDIT,
-                    on_click=lambda e,
-                    job=job: print(f"Logs for {job['name']}")
+                    on_click=lambda e, job=job: print(f"Logs for {job['name']}")
                 ),
                 ft.IconButton(
                     icon=ft.icons.INFO,
-                    on_click=lambda e,
-                    job=job: print(f"Logs for {job['name']}")
+                    on_click=lambda e, job=job: print(f"Logs for {job['name']}")
                 ),
                 ft.IconButton(
                     icon=ft.icons.DELETE,
                     # bgcolor=ft.Colors.RED_500,
-                    on_click=lambda e,
-                    job=job: delete_job(name=job['name'])
+                    on_click=lambda e, job=job: delete(value=job['name'])
                 ),
             ]
         )
