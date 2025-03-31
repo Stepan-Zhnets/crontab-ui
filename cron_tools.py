@@ -1,6 +1,24 @@
 from crontab import CronTab
+import subprocess
 
-user = "user"
+# Get the current user's username using whoami command
+try:
+    user = subprocess.check_output('whoami', shell=True).decode().strip()
+except Exception as e:
+    print(f"Failed to get the current user: {e}")
+    user = "liveuser"  # Fallback to default user if an error occurs
+
+# Mapping for special cron commands
+special_commands_map = {
+    "@reboot": None,  # crontab does not support @reboot directly in this context, so we handle it separately
+    "@hourly": "0 * * * *",
+    "@daily": "0 0 * * *",
+    "@weekly": "0 0 * * 0",
+    "@monthly": "0 0 1 * *",
+    "@yearly": "0 0 1 1 *",
+    "@annually": "0 0 1 1 *",
+    "@midnight": "0 0 * * *"
+}
 
 def check_job(name):
     with CronTab(user=user) as cron:
@@ -13,15 +31,23 @@ def create_job(name, date, command):
     with CronTab(user=user) as cron:
         job = cron.new(command=command, comment=name)
 
-        # Разбираем дату на компоненты и устанавливаем соответствующие значения для задачи
-        minute, hour, day_of_month, month, day_of_week = date.split()
-        job.minute.on(int(minute))
-        job.hour.on(int(hour))
-        job.dom.on(int(day_of_month))
-        job.month.on(int(month))
-        job.dow.on(int(day_of_week))
+        if date in special_commands_map:
+            # Handle @reboot separately since it is not supported directly by crontab for jobs
+            if date == "@reboot":
+                raise ValueError("The '@reboot' command cannot be used directly with this function. Please set up the reboot job manually.")
+            else:
+                cron_command = special_commands_map[date]
+        else:
+            # Split the date into its components and set the job accordingly
+            try:
+                minute, hour, day_of_month, month, day_of_week = date.split()
+                cron_command = f"{minute} {hour} {day_of_month} {month} {day_of_week}"
+            except ValueError:
+                raise ValueError("Date must be in the format 'minute hour day_of_month month day_of_week' or a special command.")
 
+        job.setall(cron_command)
         cron.write()
+
 
 def start_and_stop_job(name, status):
     with CronTab(user=user) as cron:
