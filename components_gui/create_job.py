@@ -1,5 +1,5 @@
 import flet as ft
-# from cron_tools import create_job
+from cron_tools import create_job
 from components_gui.components_new_job.value_data import (
     data_text_field,
     minute, hour, day, month, week,
@@ -24,8 +24,8 @@ def header_menu(page: ft.Page):
         page.close(create_new_job)
 
     def create(e):
-        data_job = f"{minute.value}, {hour.value}, {day.value}, {month.value}, {week.value}"
-        # create_job(name=None, date=None, command=None)
+        data_job = f"{minute.value} {hour.value} {day.value} {month.value} {week.value}"
+        create_job(name=name_job.value, date=data_job, command=command_job.value)
         print(f'{name_job.value}, {command_job.value}, {data_job}')
         page.close(create_new_job)
 

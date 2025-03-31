@@ -2,7 +2,7 @@ import flet as ft
 from components_gui.create_job import header_menu
 from cron_tools import delete_job, get_jobs
 
-# Данные из CronTab
+# Условные данные
 # list_jobs = [
 #     {
 #         "name": "Job 1",
@@ -21,6 +21,7 @@ from cron_tools import delete_job, get_jobs
 #     }
 # ]
 
+# Данные из CronTab
 list_jobs = get_jobs()
 
 # Главная страница
