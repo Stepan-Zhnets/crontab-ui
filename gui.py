@@ -1,5 +1,6 @@
 import flet as ft
-from components_gui.create_job import header_menu
+from components_gui.create_job import button_create_new_job
+from components_gui.button_update import button_update_page
 from cron_tools import delete_job, get_jobs
 
 # Условные данные
@@ -35,7 +36,8 @@ def main(page: ft.Page):
     page.title = "crontab ui"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
-    header_menu(page)
+    button_create_new_job(page)
+    button_update_page(page)
 
     # Заголовки таблицы
     columns = [
