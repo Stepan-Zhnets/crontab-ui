@@ -30,9 +30,11 @@ def start_and_stop_job(name, status):
                 if status.lower() == 'start':
                     # Убираем комментарий, если задача должна быть активной
                     job.enable()
+                    return 'started'
                 elif status.lower() == 'stop':
                     # Комментируем задачу, если она должна быть неактивной
                     job.disable()
+                    return 'stopped'
         cron.write()
 
 def delete_job(name):
@@ -52,5 +54,4 @@ def get_jobs():
                 "command": job.command,
                 "status": status
             })
-    print(jobs)
     return jobs
