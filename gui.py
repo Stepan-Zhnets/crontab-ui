@@ -1,28 +1,28 @@
 import flet as ft
 from components_gui.create_job import button_create_new_job
-from cron_tools import delete_job#, get_jobs
+from cron_tools import delete_job, get_jobs
 
 # Условные данные
-list_jobs = [
-    {
-        "name": "Job 1",
-        "command": "Command 1",
-        "status":"stopped"
-    },
-    {
-        "name": "Job 2",
-        "command": "Command 2",
-        "status":"started"
-    },
-    {
-        "name": "Job 3",
-        "command": "Command 3",
-        "status":"stop"
-    }
-]
+# list_jobs = [
+#     {
+#         "name": "Job 1",
+#         "command": "Command 1",
+#         "status":"stopped"
+#     },
+#     {
+#         "name": "Job 2",
+#         "command": "Command 2",
+#         "status":"started"
+#     },
+#     {
+#         "name": "Job 3",
+#         "command": "Command 3",
+#         "status":"stop"
+#     }
+# ]
 
 # Данные из CronTab
-# list_jobs = get_jobs()
+list_jobs = get_jobs()
 
 def delete_and_refresh(page, job_name):
     delete_job(name=job_name)
