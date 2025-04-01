@@ -83,7 +83,7 @@ def main(page: ft.Page):
     data_table = ft.DataTable(columns=columns, rows=rows)
 
     page.add(
-        ft.Container(content=data_table, padding=ft.padding.only(left=10, right=10))
+        ft.Container(content=data_table,padding=ft.padding.only(left=10, right=10))
     )
 
 ft.app(target=main)
