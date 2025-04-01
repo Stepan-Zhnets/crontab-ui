@@ -75,18 +75,7 @@ def update_table(page):
     # Очищаем предыдущую таблицу и добавляем новую
     page.clean()
     page.add(
-        ft.Container(content=data_table, padding=ft.padding.only(left=10, right=10)),
-        ft.TextButton(text="update page", on_click=lambda e: update_table(page))
+        ft.Container(content=data_table, padding=ft.padding.only(left=10, right=10))
     )
-
-# Главная страница
-def main(page: ft.Page):
-    page.title = "crontab ui"
-    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-
-    button_create_new_job(page)
-
-    # Инициализируем таблицу
-    update_table(page)
 
 ft.app(target=main)
