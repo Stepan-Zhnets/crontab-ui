@@ -1,30 +1,28 @@
 import flet as ft
 from components_gui.create_job import button_create_new_job
-from cron_tools import delete_job, get_jobs
+from cron_tools import delete_job#, get_jobs
 
 # Условные данные
-# list_jobs = [
-#     {
-#         "name": "Job 1",
-#         "command": "Command 1",
-#         "status":"stopped"
-#     },
-#     {
-#         "name": "Job 2",
-#         "command": "Command 2",
-#         "status":"started"
-#     },
-#     {
-#         "name": "Job 3",
-#         "command": "Command 3",
-#         "status":"stop"
-#     }
-# ]
+list_jobs = [
+    {
+        "name": "Job 1",
+        "command": "Command 1",
+        "status":"stopped"
+    },
+    {
+        "name": "Job 2",
+        "command": "Command 2",
+        "status":"started"
+    },
+    {
+        "name": "Job 3",
+        "command": "Command 3",
+        "status":"stop"
+    }
+]
 
 # Данные из CronTab
-list_jobs = get_jobs()
-
-
+# list_jobs = get_jobs()
 
 def delete_and_refresh(page, job_name):
     delete_job(name=job_name)
@@ -48,6 +46,9 @@ def main(page: ft.Page):
 
     def delete(value):
         delete_job(name=value)
+        # Обновление страницы
+        page.controls.append(data_table)
+        page.update()
 
     num=0
     rows = []
@@ -82,7 +83,7 @@ def main(page: ft.Page):
     data_table = ft.DataTable(columns=columns, rows=rows)
 
     page.add(
-        ft.Container(content=data_table,padding=ft.padding.only(left=10, right=10))
+        ft.Container(content=data_table, padding=ft.padding.only(left=10, right=10))
     )
 
 ft.app(target=main)
