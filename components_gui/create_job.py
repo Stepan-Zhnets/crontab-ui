@@ -18,7 +18,6 @@ special_commands_map = {
 #
 def set_special_command(command, minute, hour, day, month, week):
     if command == "@reboot":
-        # Handle @reboot separately since it is not supported directly by crontab for jobs
         raise ValueError("The '@reboot' command cannot be used directly with this function. Please set up the reboot job manually.")
     else:
         cron_expression = special_commands_map[command]
@@ -36,15 +35,12 @@ time_button = [
 name_job = ft.TextField(label="Name")
 command_job = ft.TextField(label="Command")
 
-def button_create_new_job(page: ft.Page, main_page):
+def button_create_new_job(page: ft.Page):
     frame = ft.Row(spacing=10)
 
     # Закрытие окна
     def handle_close(e):
         page.close(create_new_job)
-        # Обновление страницы
-        page.controls.append(main_page)
-        page.update()
 
     # Создание задачи и закрытие окна
     def create(e):
@@ -61,9 +57,6 @@ def button_create_new_job(page: ft.Page, main_page):
 
         print(f'{name_job.value}, {command_job.value}, {data_job}')
         page.close(create_new_job)
-        # Обновление страницы
-        page.controls.append(main_page)
-        page.update()
 
     # Всплывающее окно
     create_new_job = ft.AlertDialog(
@@ -110,3 +103,4 @@ def button_create_new_job(page: ft.Page, main_page):
 
     frame.controls.append(btn_new_job)
     page.add(frame)
+
