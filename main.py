@@ -1,8 +1,6 @@
 import flet as ft
 from components_gui.create_job import button_create_new_job
-from cron_tools import delete_job, get_jobs
-
-
+from cron_tools import delete_job, start_and_stop_job, get_jobs
 
 # Условные данные
 # list_jobs = [
@@ -23,10 +21,17 @@ from cron_tools import delete_job, get_jobs
 #     }
 # ]
 
-# Данные из CronTab
-list_jobs = get_jobs()
+
 
 def update_table(page):
+    # Данные из CronTab
+    list_jobs = get_jobs()
+
+    def status_switch_button(e, name, status):
+        e.control.selected = not e.control.selected
+        start_and_stop_job(name, status)
+        print(f"Job {name} was {status}")
+        e.control.update()
 
     button_create_new_job(page)
 
@@ -50,17 +55,27 @@ def update_table(page):
         num+=1
         actions = ft.Row(
             controls=[
+
                 ft.IconButton(
-                    icon=ft.icons.EDIT,
+                    icon=ft.Icons.STOP_CIRCLE,
+                    selected_icon=ft.Icons.PLAY_CIRCLE,
+                    on_click=lambda e, job=job: status_switch_button(e, name=job['name'], status=job['status']),
+                    selected=True,
+                    style=ft.ButtonStyle(color={"selected": ft.Colors.GREEN_300, "": ft.Colors.RED_300}),
+                ),
+                ft.IconButton(
+                    icon=ft.Icons.EDIT,
                     on_click=lambda e, job=job: print(f"Logs for {job['name']}")
                 ),
                 ft.IconButton(
-                    icon=ft.icons.INFO,
-                    on_click=lambda e, job=job: print(f"Logs for {job['name']}")
+                    icon=ft.Icons.INFO,
+                    on_click=lambda e, job=job: print(f"Logs for {job['name']}"),
+                    style=ft.ButtonStyle(color={"": ft.Colors.YELLOW_300}),
                 ),
                 ft.IconButton(
-                    icon=ft.icons.DELETE,
-                    on_click=lambda e, job=job: delete(value=job['name'])
+                    icon=ft.Icons.DELETE,
+                    on_click=lambda e, job=job: delete(value=job['name']),
+                    style=ft.ButtonStyle(color={"": ft.Colors.RED_300}),
                 ),
             ]
         )
@@ -70,7 +85,7 @@ def update_table(page):
                 ft.DataCell(ft.Text(num)),
                 ft.DataCell(ft.Text(job["name"])),
                 ft.DataCell(ft.Text(job["command"])),
-                ft.DataCell(ft.TextButton(job["status"])),
+                ft.DataCell(ft.Text(job["status"])),
                 ft.DataCell(actions)
             ]
         ))
