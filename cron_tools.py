@@ -62,6 +62,7 @@ def start_and_stop_job(name, status):
                     job.disable()
                     return 'stopped'
         cron.write()
+    return None
 
 def delete_job(name):
     with CronTab(user=user) as cron:
