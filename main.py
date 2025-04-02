@@ -21,10 +21,11 @@ from cron_tools import delete_job, start_and_stop_job, get_jobs
 #     }
 # ]
 
-# Данные из CronTab
-list_jobs = get_jobs()
+
 
 def update_table(page):
+    # Данные из CronTab
+    list_jobs = get_jobs()
 
     def status_switch_button(e, name, status):
         e.control.selected = not e.control.selected
