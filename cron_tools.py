@@ -53,10 +53,10 @@ def start_and_stop_job(name, status):
     with CronTab(user=user) as cron:
         for job in cron:
             if job.comment == name:
-                if status.lower() == 'enabled':
+                if status.lower() == 'disabled':
                     # Убираем комментарий, если задача должна быть активной.
                     job.enable()
-                elif status.lower() == 'disabled':
+                elif status.lower() == 'enabled':
                     # Комментируем задачу, если она должна быть неактивной
                     job.disable()
         cron.write()
