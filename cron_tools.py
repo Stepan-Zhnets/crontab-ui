@@ -58,7 +58,7 @@ def start_and_stop_job(name, status):
                     job.enable()
                 elif status.lower() == 'enabled':
                     # Комментируем задачу, если она должна быть неактивной
-                    job.disable()
+                    job.enable(False)
         cron.write()
     return None
 
