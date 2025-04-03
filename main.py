@@ -3,23 +3,7 @@ from components_gui.create_job import button_create_new_job
 from cron_tools import delete_job, start_and_stop_job, get_jobs
 
 # Условные данные
-# list_jobs = [
-#     {
-#         "name": "Job 1",
-#         "command": "Command 1",
-#         "status":"stopped"
-#     },
-#     {
-#         "name": "Job 2",
-#         "command": "Command 2",
-#         "status":"started"
-#     },
-#     {
-#         "name": "Job 3",
-#         "command": "Command 3",
-#         "status":"stop"
-#     }
-# ]
+# list_jobs = []
 
 def update_table(page):
     # Данные из CronTab
@@ -93,7 +77,7 @@ def update_table(page):
                 ft.DataCell(ft.Text(num)),
                 ft.DataCell(ft.Text(job["name"])),
                 ft.DataCell(ft.Text(job["command"])),
-                ft.DataCell(ft.Text(job["status"])),
+                ft.DataCell(ft.Text("enabled" if selected_status else "disabled")),
                 ft.DataCell(actions)
             ]
         ))
