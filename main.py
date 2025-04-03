@@ -1,37 +1,44 @@
 import flet as ft
 from components_gui.create_job import button_create_new_job
-from cron_tools import delete_job, start_and_stop_job, get_jobs
+from cron_tools import delete_job, start_and_stop_job#, get_jobs
 
 # Условные данные
-# list_jobs = [
-#     {
-#         "name": "Job 1",
-#         "command": "Command 1",
-#         "status":"stopped"
-#     },
-#     {
-#         "name": "Job 2",
-#         "command": "Command 2",
-#         "status":"started"
-#     },
-#     {
-#         "name": "Job 3",
-#         "command": "Command 3",
-#         "status":"stop"
-#     }
-# ]
-
-
+list_jobs = [
+    {
+        "name": "Job 1",
+        "command": "Command 1",
+        "status":"stopped"
+    },
+    {
+        "name": "Job 2",
+        "command": "Command 2",
+        "status":"started"
+    },
+    {
+        "name": "Job 3",
+        "command": "Command 3",
+        "status":"stop"
+    }
+]
 
 def update_table(page):
     # Данные из CronTab
-    list_jobs = get_jobs()
+    # list_jobs = get_jobs()
 
-    def status_switch_button(e, name, status):
+    def status_switch_button(e, name):
         e.control.selected = not e.control.selected
-        start_and_stop_job(name, status)
-        print(f"Job {name} was {status}")
+        new_status = "enabled" if e.control.selected else "disabled"
+        start_and_stop_job(name, new_status)
+
+        # Update the job's status in list_jobs
+        for job in list_jobs:
+            if job['name'] == name:
+                job['status'] = new_status
+                break
+
+        print(f"Job {name} was set to {new_status}")
         e.control.update()
+        update_table(page)
 
     button_create_new_job(page)
 
@@ -53,14 +60,15 @@ def update_table(page):
     rows = []
     for job in list_jobs:
         num+=1
+        selected_status = job['status'].lower() == 'enabled'
         actions = ft.Row(
             controls=[
 
                 ft.IconButton(
                     icon=ft.Icons.STOP_CIRCLE,
                     selected_icon=ft.Icons.PLAY_CIRCLE,
-                    on_click=lambda e, job=job: status_switch_button(e, name=job['name'], status=job['status']),
-                    selected=True,
+                    on_click=lambda e, name=job['name']: status_switch_button(e, name),
+                    selected=not selected_status,  # Set the initial state based on job's status
                     style=ft.ButtonStyle(color={"selected": ft.Colors.GREEN_300, "": ft.Colors.RED_300}),
                 ),
                 ft.IconButton(
@@ -95,8 +103,8 @@ def update_table(page):
     page.clean()
     page.add(
         ft.Container(content=button_create_new_job(page)),
-        ft.Container(content=data_table, padding=ft.padding.only(left=10, right=10)),
         ft.TextButton(text="update page", on_click=lambda e: update_table(page)),
+        ft.Container(content=data_table, padding=ft.padding.only(left=10, right=10)),
     )
 
 # Главная страница
