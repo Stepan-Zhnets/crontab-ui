@@ -1,5 +1,5 @@
 import flet as ft
-from cron_tools import create_job
+from cron_tools import create_job, check_job
 from components_gui.components_new_job.value_data import (
     data_text_field,
     minute, hour, day, month, week,
@@ -18,9 +18,22 @@ def button_create_new_job(page: ft.Page):
     # Создание задачи и закрытие окна
     def create(e):
         data_job = f"{minute.value} {hour.value} {day.value} {month.value} {week.value}"
-        create_job(name=name_job.value, date=data_job, command=command_job.value)
-        print(f'{name_job.value}, {command_job.value}, {data_job}')
-        page.close(create_new_job)
+        # Check if job with the same name already exists
+        if check_job(name=name_job.value):
+            alert_dialog = ft.AlertDialog(
+                modal=True,
+                title=ft.Text("Warning"),
+                content=ft.Text(f"Job with name '{name_job.value}' already exists."),
+                actions=[
+                    ft.TextButton(text="OK", on_click=lambda _: page.dialog.open)
+                ]
+            )
+            page.dialog = alert_dialog
+            page.dialog.open = True
+        else:
+            create_job(name=name_job.value, date=data_job, command=command_job.value)
+            print(f'{name_job.value}, {command_job.value}, {data_job}')
+            page.close(create_new_job)
 
     # Всплывающее окно
     create_new_job = ft.AlertDialog(
