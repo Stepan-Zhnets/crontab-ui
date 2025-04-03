@@ -47,13 +47,12 @@ def update_table(page):
         selected_status = job['status'].lower() == 'enabled'
         actions = ft.Row(
             controls=[
-
                 ft.IconButton(
-                    icon=ft.Icons.STOP_CIRCLE,
-                    selected_icon=ft.Icons.PLAY_CIRCLE,
+                    icon=ft.Icons.PLAY_CIRCLE,
+                    selected_icon=ft.Icons.STOP_CIRCLE,
                     on_click=lambda e, name=job['name']: status_switch_button(e, name),
-                    selected=not selected_status,  # Set the initial state based on job's status
-                    style=ft.ButtonStyle(color={"selected": ft.Colors.GREEN_300, "": ft.Colors.RED_300}),
+                    selected=not selected_status,
+                    style=ft.ButtonStyle(color={"selected": ft.Colors.RED_300, "": ft.Colors.GREEN_300}),
                 ),
                 ft.IconButton(
                     icon=ft.Icons.EDIT,
