@@ -1,15 +1,15 @@
 import flet as ft
 from cron_tools import create_job, check_job
 from components_gui.value_data import (
-    data_text_field,
-    minute, hour, day, month, week,
+    default_data_text_field,
+    # minute, hour, day, month, week,
 )
 
-name_job = ft.TextField(label="Name")
-command_job = ft.TextField(label="Command")
-
-def button_create_new_job(page: ft.Page):
+def button_edit_job(page: ft.Page, default_name, default_data, default_command):
     frame = ft.Row(spacing=10)
+
+    name_job = ft.TextField(label="Name", value=default_name)
+    command_job = ft.TextField(label="Command", value=default_command)
 
     # Закрытие окна
     def handle_close(e):
@@ -17,19 +17,18 @@ def button_create_new_job(page: ft.Page):
 
     # Создание задачи и закрытие окна
     def create(e):
-        data_job = f"{minute.value} {hour.value} {day.value} {month.value} {week.value}"
-        # Check if job with the same name already exists
+        # data_job = f"{minute.value} {hour.value} {day.value} {month.value} {week.value}"
         if check_job(name=name_job.value):
             ...
         else:
-            create_job(name=name_job.value, date=data_job, command=command_job.value)
-            print(f'{name_job.value}, {command_job.value}, {data_job}')
+            create_job(name=name_job.value, date=default_data, command=command_job.value)
+            print(f'{name_job.value}, {command_job.value}, {default_data}')
             page.close(create_new_job)
 
     # Всплывающее окно
     create_new_job = ft.AlertDialog(
             modal=True,
-            title=ft.Text("Create new job"),
+            title=ft.Text("Edit a job"),
             actions=[
                 ft.AutofillGroup(
                     ft.Column(
@@ -45,7 +44,7 @@ def button_create_new_job(page: ft.Page):
 
                             ft.Text("Time"),
                             ft.Row(
-                                    controls=data_text_field
+                                    controls=default_data_text_field(default_data)
                                 ),
                             # ft.TextField(
                             #     label="Job"
@@ -63,12 +62,4 @@ def button_create_new_job(page: ft.Page):
             ]
         )
 
-    # Кнопка, вызывающая всплывающееся окно
-    btn_new_job = ft.ElevatedButton(
-        text="new job",
-        on_click=lambda e: page.open(create_new_job)
-    )
-
-    frame.controls.append(btn_new_job)
     page.add(frame)
-
