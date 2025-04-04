@@ -19,10 +19,12 @@ def button_create_new_job(page: ft.Page):
     def create(e):
         data_job = f"{minute.value} {hour.value} {day.value} {month.value} {week.value}"
         # Check if job with the same name already exists
-        check_job(name=name_job.value)
-        create_job(name=name_job.value, date=data_job, command=command_job.value)
-        print(f'{name_job.value}, {command_job.value}, {data_job}')
-        page.close(create_new_job)
+        if check_job(name=name_job.value):
+            ...
+        else:
+            create_job(name=name_job.value, date=data_job, command=command_job.value)
+            print(f'{name_job.value}, {command_job.value}, {data_job}')
+            page.close(create_new_job)
 
     # Всплывающее окно
     create_new_job = ft.AlertDialog(
