@@ -56,5 +56,5 @@ data_text_field = [
         width=80,
         content=week
     ),
-    ft.TextButton("Set", on_click=None)
+    # ft.TextButton("Set", on_click=None)
 ]
