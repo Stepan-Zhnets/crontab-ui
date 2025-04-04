@@ -20,16 +20,7 @@ def button_create_new_job(page: ft.Page):
         data_job = f"{minute.value} {hour.value} {day.value} {month.value} {week.value}"
         # Check if job with the same name already exists
         if check_job(name=name_job.value):
-            alert_dialog = ft.AlertDialog(
-                modal=True,
-                title=ft.Text("Warning"),
-                content=ft.Text(f"Job with name '{name_job.value}' already exists."),
-                actions=[
-                    ft.TextButton(text="OK", on_click=lambda _: page.dialog.open)
-                ]
-            )
-            page.dialog = alert_dialog
-            page.dialog.open = True
+            ...
         else:
             create_job(name=name_job.value, date=data_job, command=command_job.value)
             print(f'{name_job.value}, {command_job.value}, {data_job}')
