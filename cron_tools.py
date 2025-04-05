@@ -80,3 +80,16 @@ def get_jobs():
             })
     print(f'"name": {job.comment}, "cron": {job.cron}, "command": {job.command}, "status": {status}')
     return jobs
+
+def update_job(name, new_name=None, new_command=None, new_date=None):
+    with CronTab(user=user) as cron:
+        for job in cron:
+            if job.comment == name:
+                if new_name:
+                    job.comment = new_name
+                if new_command:
+                    job.command = new_command
+                if new_date:
+                    minute, hour, day_of_month, month, day_of_week = new_date.split()
+                    job.setall(f"{minute} {hour} {day_of_month} {month} {day_of_week}")
+        cron.write()

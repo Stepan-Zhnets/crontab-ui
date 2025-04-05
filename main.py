@@ -32,6 +32,7 @@ def update_table(page):
         ft.DataColumn(ft.Text("#")),
         ft.DataColumn(ft.Text("Name")),
         ft.DataColumn(ft.Text("Command")),
+        ft.DataColumn(ft.Text("Time")),
         ft.DataColumn(ft.Text("Status")),
         ft.DataColumn(ft.Text("Actions"))
     ]
@@ -57,7 +58,8 @@ def update_table(page):
                 ),
                 ft.IconButton(
                     icon=ft.Icons.EDIT,
-                    on_click=lambda e, job=job: page.open(button_edit_job(default_name=job["name"],
+                    on_click=lambda e, job=job: page.open(button_edit_job(page,
+                                                                            default_name=job["name"],
                                                                             default_data=job["data"],
                                                                             default_command=job["command"]
                                                                             ))
@@ -80,6 +82,7 @@ def update_table(page):
                 ft.DataCell(ft.Text(num)),
                 ft.DataCell(ft.Text(job["name"])),
                 ft.DataCell(ft.Text(job["command"])),
+                ft.DataCell(ft.Text(job["cron"])),
                 ft.DataCell(ft.Text("enabled" if selected_status else "disabled")),
                 ft.DataCell(actions)
             ]
