@@ -58,10 +58,10 @@ def update_table(page):
                 ),
                 ft.IconButton(
                     icon=ft.Icons.EDIT,
-                    on_click=lambda e, job=job: page.open(button_edit_job(page,
+                    on_click=lambda e, job=job: button_edit_job(page,
                                                                         default_name=job["name"],
                                                                         default_command=job["command"],
-                                                                        default_cron=job["cron"])),
+                                                                        default_cron=job["cron"]),
                     style=ft.ButtonStyle(color={"": ft.Colors.BLUE_300}),
                 ),
 
