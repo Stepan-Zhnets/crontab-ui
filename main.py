@@ -54,7 +54,7 @@ def update_table(page):
                     selected_icon=ft.Icons.STOP_CIRCLE,
                     on_click=lambda e, name=job['name']: status_switch_button(e, name),
                     selected=not selected_status,
-                    style=ft.ButtonStyle(color={"selected": ft.Colors.RED_300, "": ft.Colors.GREEN_300}),
+                    style=ft.ButtonStyle(color={"selected": ft.Colors.ORANGE_300, "": ft.Colors.GREEN_300}),
                 ),
                 ft.IconButton(
                     icon=ft.Icons.EDIT,
@@ -63,7 +63,7 @@ def update_table(page):
                                                                 default_command=job["command"],
                                                                 default_cron=job["cron"]
                                                                 ),
-                    style=ft.ButtonStyle(color={"": ft.Colors.YELLOW_300}),
+                    style=ft.ButtonStyle(color={"": ft.Colors.BLUE_300}),
                 ),
 
                 # ft.IconButton(

@@ -36,7 +36,7 @@ def button_edit_job(page: ft.Page, default_name=None, default_command=None, defa
                     ft.Column(
                         controls=[
                             # Имя задачи (неизменяемое)
-                            ft.TextField(label="Name", value=default_name, read_only=True),
+                            ft.TextField(label="Name", value=default_name+" *", read_only=True),
                             # Команда задачи
                             command_job := ft.TextField(label="Command", value=default_command or ""),
                             ft.Text("Time"),
