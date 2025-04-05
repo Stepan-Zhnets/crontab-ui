@@ -6,7 +6,7 @@ from components_gui.value_data import (
 )
 
 def button_edit_job(page: ft.Page, default_name, default_command, default_cron):
-    frame = ft.Row(spacing=10)
+    # frame = ft.Row(spacing=10)
 
     # Setting pre-filled values for the text fields
     name_job = ft.TextField(label="Name", value=default_name)
@@ -62,6 +62,6 @@ def button_edit_job(page: ft.Page, default_name, default_command, default_cron):
     #     on_click=lambda e: page.open(edit_new_job)
     # )
 
-    frame.controls.append(edit_new_job)
-    page.add(frame)
+    # frame.controls.append(edit_new_job)
+    # page.add(frame)
 
