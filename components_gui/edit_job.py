@@ -62,6 +62,6 @@ def button_edit_job(page: ft.Page, default_name, default_command, default_cron):
     #     on_click=lambda e: page.open(edit_new_job)
     # )
 
-    # frame.controls.append(edit_new_job)
+    # frame.controls.append(btn_edit_job)
     # page.add(frame)
 

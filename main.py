@@ -93,6 +93,7 @@ def update_table(page):
     # Очищаем предыдущую таблицу и добавляем новую
     page.clean()
     page.add(
+        button_edit_job(page),
         ft.Container(content=button_create_new_job(page)),
         ft.TextButton(text="update page", on_click=lambda e: update_table(page)),
         ft.Container(content=data_table, padding=ft.padding.only(left=10, right=10)),
