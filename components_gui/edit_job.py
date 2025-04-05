@@ -57,11 +57,11 @@ def button_edit_job(page: ft.Page, default_name, default_command, default_cron):
     )
 
     # Кнопка, вызывающая всплывающееся окно
-    btn_edit_job = ft.ElevatedButton(
-        text="Edit job",
-        on_click=lambda e: page.open(edit_new_job)
-    )
+    # btn_edit_job = ft.ElevatedButton(
+    #     text="Edit job",
+    #     on_click=lambda e: page.open(edit_new_job)
+    # )
 
-    frame.controls.append(btn_edit_job)
+    frame.controls.append(edit_new_job)
     page.add(frame)
 
