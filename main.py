@@ -1,6 +1,6 @@
 import flet as ft
 from components_gui.create_job import button_create_new_job
-# from components_gui.edit_job import button_edit_job
+from components_gui.edit_job import button_edit_job
 from cron_tools import delete_job, start_and_stop_job, get_jobs
 
 # Условные данные
@@ -56,14 +56,15 @@ def update_table(page):
                     selected=not selected_status,
                     style=ft.ButtonStyle(color={"selected": ft.Colors.RED_300, "": ft.Colors.GREEN_300}),
                 ),
-                # ft.IconButton(
-                #     icon=ft.Icons.EDIT,
-                #     on_click=lambda e, job=job: page.open(button_edit_job(page,
-                #                                                             default_name=job["name"],
-                #                                                             # default_data=job["cron"],
-                #                                                             default_command=job["command"]
-                #                                                             ))
-                # ),
+                ft.IconButton(
+                    icon=ft.Icons.EDIT,
+                    on_click=lambda e, job=job: page.open(button_edit_job(page,
+                                                                        default_name=job["name"],
+                                                                        default_command=job["command"],
+                                                                        default_cron=job["cron"])),
+                    style=ft.ButtonStyle(color={"": ft.Colors.BLUE_300}),
+                ),
+
                 # ft.IconButton(
                 #     icon=ft.Icons.INFO,
                 #     on_click=lambda e, job=job: print(f"Logs for {job['name']}"),
