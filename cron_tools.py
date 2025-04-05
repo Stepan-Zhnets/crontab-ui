@@ -74,7 +74,7 @@ def get_jobs():
             status = "enabled" if job.is_enabled() else "disabled"
             jobs.append({
                 "name": job.comment,
-                "cron": job.special,
+                # "cron": job.special,
                 "command": job.command,
                 "status": status
             })
