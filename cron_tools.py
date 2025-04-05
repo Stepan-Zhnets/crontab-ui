@@ -1,4 +1,5 @@
 from crontab import CronTab
+import croniter
 import subprocess
 
 # Get the current user's username using whoami command
@@ -10,7 +11,7 @@ except Exception as e:
 
 # Mapping for special cron commands
 special_commands_map = {
-    "@reboot": None,  # crontab does not support @reboot directly in this context, so we handle it separately
+    "@reboot": "Reboot",
     "@hourly": "0 * * * *",
     "@daily": "0 0 * * *",
     "@weekly": "0 0 * * 0",
@@ -38,12 +39,12 @@ def create_job(name, date, command):
             else:
                 cron_command = special_commands_map[date]
         else:
-            # Split the date into its components and set the job accordingly
+            # Validate and use the provided cron expression
             try:
-                minute, hour, day_of_month, month, day_of_week = date.split()
-                cron_command = f"{minute} {hour} {day_of_month} {month} {day_of_week}"
-            except ValueError:
-                raise ValueError("Date must be in the format 'minute hour day_of_month month day_of_week' or a special command.")
+                croniter.croniter(date, "2023-01-01")
+                cron_command = date
+            except ValueError as e:
+                raise ValueError("Invalid cron expression: " + str(e))
 
         job.setall(cron_command)
         cron.write()
@@ -72,14 +73,15 @@ def get_jobs():
     with CronTab(user=user) as cron:
         for job in cron:
             status = "enabled" if job.is_enabled() else "disabled"
+            cron_expression = f"{job.minute} {job.hour} {job.dom} {job.month} {job.dow}"
             jobs.append({
                 "name": job.comment,
-                "cron": job.pre_comment,
+                "cron": cron_expression,
                 "command": job.command,
                 "status": status
             })
-    print(f'"name": {job.comment}, "cron": {job.minute}, "command": {job.command}, "status": {status}')
-    return jobs
+            print(f'"name": {job.comment}, "cron": {cron_expression}, "command": {job.command}, "status": {status}')
+    return jobs 
 
 def update_job(name, new_name=None, new_command=None, new_date=None):
     with CronTab(user=user) as cron:
