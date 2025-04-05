@@ -74,11 +74,11 @@ def get_jobs():
             status = "enabled" if job.is_enabled() else "disabled"
             jobs.append({
                 "name": job.comment,
-                # "cron": job.special,
+                "cron": job.valid,
                 "command": job.command,
                 "status": status
             })
-    print(f'"name": {job.comment}, "cron": {job.cron}, "command": {job.command}, "status": {status}')
+    print(f'"name": {job.comment}, "cron": {job.valid}, "command": {job.command}, "status": {status}')
     return jobs
 
 def update_job(name, new_name=None, new_command=None, new_date=None):
