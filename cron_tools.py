@@ -75,10 +75,10 @@ def get_jobs():
             jobs.append({
                 "name": job.comment,
                 "cron": job.special,
-                "command": job.last_run,
+                "command": job.env,
                 "status": status
             })
-    print(f'"name": {job.comment}, "cron": {job.last_run}, "command": {job.command}, "status": {status}')
+    print(f'"name": {job.comment}, "cron": {job.env}, "command": {job.command}, "status": {status}')
     return jobs
 
 def update_job(name, new_name=None, new_command=None, new_date=None):
