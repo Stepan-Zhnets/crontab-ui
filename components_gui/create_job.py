@@ -1,6 +1,6 @@
 import flet as ft
 from cron_tools import create_job, check_job
-from components_gui.components_new_job.value_data import (
+from components_gui.value_data import (
     data_text_field,
     minute, hour, day, month, week,
 )
