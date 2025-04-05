@@ -1,14 +1,14 @@
 import flet as ft
 from components_gui.create_job import button_create_new_job
 from components_gui.edit_job import button_edit_job
-from cron_tools import delete_job, start_and_stop_job, get_jobs
+from cron_tools import delete_job, start_and_stop_job#, get_jobs
 
 # Условные данные
-# list_jobs = []
+list_jobs = []
 
 def update_table(page):
     # Данные из CronTab
-    list_jobs = get_jobs()
+    # list_jobs = get_jobs()
 
     def status_switch_button(e, name):
         e.control.selected = not e.control.selected
@@ -58,10 +58,10 @@ def update_table(page):
                 ),
                 ft.IconButton(
                     icon=ft.Icons.EDIT,
-                    on_click=lambda e, job=job: button_edit_job(page,
+                    on_click=lambda e, job=job: page.open(button_edit_job(page,
                                                                         default_name=job["name"],
                                                                         default_command=job["command"],
-                                                                        default_cron=job["cron"]),
+                                                                        default_cron=job["cron"])),
                     style=ft.ButtonStyle(color={"": ft.Colors.BLUE_300}),
                 ),
 
@@ -93,7 +93,6 @@ def update_table(page):
     # Очищаем предыдущую таблицу и добавляем новую
     page.clean()
     page.add(
-        button_edit_job(page),
         ft.Container(content=button_create_new_job(page)),
         ft.TextButton(text="update page", on_click=lambda e: update_table(page)),
         ft.Container(content=data_table, padding=ft.padding.only(left=10, right=10)),
