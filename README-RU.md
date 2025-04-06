@@ -4,6 +4,9 @@
 
 crontab-ui - это пользовательская программа с графической оболочкой, предоставляющая возможность работы с инструментом cron для автоматизации задач.
 
+![CrontabUI_mainPage](https://github.com/Stepan-Zhnets/crontab-ui/assets/crontabUI.png!)
+![termCrontab](https://github.com/Stepan-Zhnets/crontab-ui/assets/termCrontab.png)
+
 # Установка
 
 ``` bash
@@ -37,3 +40,39 @@ fi
 echo "Запуск main.py..."
 uv run main.py
 ```
+
+## Виды запуска программы
+### Desktop
+
+``` sh
+uv run flet main.py
+```
+
+``` sh
+flet run main.py
+```
+
+### Web
+
+```sh
+uv run flet --web main.py
+```
+
+``` sh
+flet run --web main.py
+```
+
+# Работа с программой
+
+## Создание работы
+
+![createNewJob](https://github.com/Stepan-Zhnets/crontab-ui/assets/assets/createNewJob.png)
+
+## Панель "действия"
+
+![actions](https://github.com/Stepan-Zhnets/crontab-ui/assets/assets/actions.png)
+
+### Редактирование работы
+
+![editJob](https://github.com/Stepan-Zhnets/crontab-ui/assets/editJob.png)
+
