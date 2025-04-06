@@ -4,7 +4,9 @@ Enter in: [README-RU](./README-RU.md)
 
 crontab-ui is a user-defined program with a graphical shell that provides the ability to work with the cron tool to automate tasks.
 
-![main_page](https://github.com/Stepan-Zhnets/crontab-ui/assets/crontabUI.png!)
+![main_page](assets/crontabUI.png)
+
+![termCrontab](assets/termCrontab.png)
 
 # Installation
 
@@ -65,12 +67,12 @@ flet run --web main.py
 
 ## Creating a job
 
-![createNewJob](https://github.com/Stepan-Zhnets/crontab-ui/assets/assets/createNewJob.png)
+![createNewJob](assets/createNewJob.png)
 
 ## The Actions panel
 
-![actions](https://github.com/Stepan-Zhnets/crontab-ui/assets/assets/actions.png)
+![actions](assets/actions.png)
 
 ### Editing a work
 
-![editJob](https://github.com/Stepan-Zhnets/crontab-ui/assets/editJob.png)
+![editJob](assets/editJob.png)
