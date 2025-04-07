@@ -8,6 +8,26 @@ crontab-ui is a user-defined program with a graphical shell that provides the ab
 
 ![termCrontab](assets/termCrontab.png)
 
+# Python tools
+
+**UI: [Flet](https://flet.dev/)**
+
+<img src="assets/fletLogo.svg" width="50">
+
+**Flet** — is a framework that enables you to easily build real-time web, mobile, and desktop apps in your favorite language and securely share them with your team. No frontend experience is required.
+
+---
+
+**Tools for working with Cron: [python-crontab](https://pypi.org/project/python-crontab/#description), [croniter](https://pypi.org/project/croniter/)**
+
+<img src="assets/pythonCrontab.svg" width="50">
+
+**python-crontab** - Crontab module for reading and writing crontab files and accessing the system cron automatically and simply using a direct API.
+
+**Croniter** - croniter provides iteration for the datetime object with a cron like format.
+
+---
+
 # Installation
 
 ```bash
