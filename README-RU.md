@@ -1,6 +1,9 @@
 Пеерйти в: [README-EN](./README.md)
 
-# crontab-ui
+<div align="center">
+    <h1>crontab-ui</h1>
+    <img   src="assets/LogoCrontabUI.png" width="100">
+</div>
 
 **Crontab-ui** - это пользовательская программа с графической оболочкой, предоставляющая возможность работы с инструментом `cron` для автоматизации задач.
 
