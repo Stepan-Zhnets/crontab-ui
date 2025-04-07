@@ -1,6 +1,9 @@
 Enter in: [README-RU](./README-RU.md)
 
-# crontab-ui
+<div align="center">
+    <h1>crontab-ui</h1>
+    <img   src="assets/LogoCrontabUI.png" width="100">
+</div>
 
 **Crontab-ui** is a user-defined program with a graphical shell that provides the ability to work with the cron tool to automate tasks.
 
