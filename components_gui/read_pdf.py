@@ -1,21 +1,15 @@
 import flet as ft
-# import os
+import os
 import webbrowser
 
 files = {
-    "Main list": "../manual/📍_Main_list.pdf",
-    "Create-Edit job": "../manual/📝_Create-Edit_job.pdf",
-    "Main panel": "../manual/📰_Main_panel.pdf"
+    "Main list": "./manual/📍_Main_list.pdf",
+    "Create-Edit job": "./manual/📝_Create-Edit_job.pdf",
+    "Main panel": "./manual/📰_Main_panel.pdf"
 }
 
 def open_file(path):
-    webbrowser.open(path)
-    # if os.name == 'nt':
-    #     # Windows
-    #     os.system(f"start {path}")
-    # else:
-    #     # POSIX (Linux, macOS)
-    #     os.system(f"chromium-browser {path}")
+    webbrowser.open(os.path.abspath(path))
 
 def open_manual_list(page: ft.Page):
     # Закрытие окна
