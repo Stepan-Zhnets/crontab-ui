@@ -8,8 +8,8 @@ from components_gui.value_data import (
 name_job = ft.TextField(label="Name")
 command_job = ft.TextField(label="Command")
 
-def button_create_new_job(page: ft.Page):
-    frame = ft.Row(spacing=10)
+def open_create_new_job(page: ft.Page):
+    # frame = ft.Row(spacing=10)
 
     # Закрытие окна
     def handle_close(e):
@@ -34,15 +34,12 @@ def button_create_new_job(page: ft.Page):
                 ft.AutofillGroup(
                     ft.Column(
                         controls=[
-                            # Имя задачи
                             name_job,
-                            # Команда задачи
                             command_job,
                             # ft.Text("Quick Schedule"),
                             # ft.Row(
                             #         controls=time_button
                             #     ),
-
                             ft.Text("Time"),
                             ft.Row(
                                     controls=data_text_field
@@ -62,13 +59,5 @@ def button_create_new_job(page: ft.Page):
                 ),
             ]
         )
-
-    # Кнопка, вызывающая всплывающееся окно
-    btn_new_job = ft.ElevatedButton(
-        text="new job",
-        on_click=lambda e: page.open(create_new_job)
-    )
-
-    frame.controls.append(btn_new_job)
-    page.add(frame)
+    page.open(create_new_job)
 

@@ -1,14 +1,15 @@
 import flet as ft
-from components_gui.create_job import button_create_new_job
+from components_gui.create_job import open_create_new_job
 from components_gui.edit_job import button_edit_job
-from cron_tools import delete_job, start_and_stop_job, get_jobs
+from components_gui.read_pdf import open_manual_list
+from cron_tools import delete_job, start_and_stop_job#, get_jobs
 
 # Условные данные
-# list_jobs = []
+list_jobs = []
 
 def update_table(page):
     # Данные из CronTab
-    list_jobs = get_jobs()
+    # list_jobs = get_jobs()
 
     def status_switch_button(e, name):
         e.control.selected = not e.control.selected
@@ -25,7 +26,7 @@ def update_table(page):
         e.control.update()
         update_table(page)
 
-    button_create_new_job(page)
+    # button_create_new_job(page)
 
     # Заголовки таблицы
     columns = [
@@ -94,16 +95,34 @@ def update_table(page):
     # Очищаем предыдущую таблицу и добавляем новую
     page.clean()
     page.add(
-        ft.Container(content=button_create_new_job(page)),
-        ft.TextButton(text="update page", on_click=lambda e: update_table(page)),
-        ft.Container(content=data_table, padding=ft.padding.only(left=10, right=10)),
+        ft.Row(
+            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[
+                ft.TextButton(
+                    text="new job",
+                    on_click=lambda e: open_create_new_job(page)
+                ),
+                # ft.Container(content=open_create_new_job(page)),
+                ft.TextButton(
+                    text="manual",
+                    on_click=lambda e: open_manual_list(page)
+                ),
+                ft.TextButton(
+                    text="update page",
+                    on_click=lambda e: update_table(page)
+                ),
+            ]
+        ),
+        ft.Container(
+            content=data_table,
+            padding=ft.padding.only(left=10, right=10)
+        ),
     )
 
 # Главная страница
 def main(page: ft.Page):
     page.title = "crontab ui"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-
     # Инициализируем таблицу
     update_table(page)
 
