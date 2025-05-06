@@ -17,7 +17,11 @@ def open_manual_list(page: ft.Page):
         page.close(manual_page)
 
     buttons = [
-        ft.TextButton(text=name, on_click=lambda e, p=path: open_file(p))
+        ft.TextButton(
+            text=name,
+            on_click=lambda e,
+            p=path: open_file(p)
+        )
         for name, path in files.items()
     ]
 

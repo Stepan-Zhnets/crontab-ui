@@ -51,6 +51,7 @@ def open_create_new_job(page: ft.Page):
                     )
                 ),
                 # ft.Checkbox(label="Enable error logging"),
+                ft.Divider(height=30, thickness=3),
                 ft.Row(
                     controls =[
                         ft.TextButton("Cancel", on_click=handle_close),

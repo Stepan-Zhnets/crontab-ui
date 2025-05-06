@@ -41,11 +41,15 @@ def button_edit_job(page: ft.Page, default_name=None, default_command=None, defa
                             command_job := ft.TextField(label="Command", value=default_command or ""),
                             ft.Text("Time"),
                             ft.Row(
-                                    controls=data_text_field
-                                ),
+                                controls=data_text_field
+                            ),
                         ]
                     )
                 ),
+                ft.TextField(
+                    label=f"{None}"
+                ),
+                ft.Divider(height=30, thickness=3),
                 ft.Row(
                     controls =[
                         ft.TextButton("Cancel", on_click=handle_close),
