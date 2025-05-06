@@ -2,14 +2,14 @@ import flet as ft
 from components_gui.create_job import open_create_new_job
 from components_gui.edit_job import button_edit_job
 from components_gui.read_pdf import open_manual_list
-from cron_tools import delete_job, start_and_stop_job#, get_jobs
+from cron_tools import delete_job, start_and_stop_job, get_jobs
 
 # Условные данные
-list_jobs = []
+# list_jobs = []
 
 def update_table(page):
     # Данные из CronTab
-    # list_jobs = get_jobs()
+    list_jobs = get_jobs()
 
     def status_switch_button(e, name):
         e.control.selected = not e.control.selected
