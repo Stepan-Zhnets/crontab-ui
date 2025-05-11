@@ -1,14 +1,19 @@
 import flet as ft
-from components_gui.create_job import open_create_new_job
-from components_gui.edit_job import button_edit_job
-from components_gui.read_pdf import open_manual_list
-from cron_tools import delete_job, start_and_stop_job, get_jobs
+from components_gui import (
+    open_create_new_job,
+    button_edit_job,
+    open_manual_list
+)
+from cron_tools import (
+    delete_job,
+    start_and_stop_job,
+    get_jobs
+)
 
 # Условные данные
 # list_jobs = []
 
 def update_table(page):
-    # Данные из CronTab
     list_jobs = get_jobs()
 
     def status_switch_button(e, name):
@@ -16,7 +21,6 @@ def update_table(page):
         new_status = "enabled" if e.control.selected else "disabled"
         start_and_stop_job(name, new_status)
 
-        # Update the job's status in list_jobs
         for job in list_jobs:
             if job['name'] == name:
                 job['status'] = new_status
@@ -38,7 +42,6 @@ def update_table(page):
 
     def delete(value):
         delete_job(value)
-        # Обновление страницы
         update_table(page)
 
     num=0
@@ -89,7 +92,6 @@ def update_table(page):
         ))
     data_table = ft.DataTable(columns=columns, rows=rows)
 
-    # Очищаем предыдущую таблицу и добавляем новую
     page.clean()
     page.add(
         ft.Row(

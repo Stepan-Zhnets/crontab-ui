@@ -1,6 +1,6 @@
 import flet as ft
 from cron_tools import create_job, check_job
-from components_gui.value_data import (
+from components_gui import (
     data_text_field,
     minute, hour, day, month, week,
 )
@@ -9,16 +9,11 @@ name_job = ft.TextField(label="Name")
 command_job = ft.TextField(label="Command")
 
 def open_create_new_job(page: ft.Page):
-    # frame = ft.Row(spacing=10)
-
-    # Закрытие окна
     def handle_close(e):
         page.close(create_new_job)
 
-    # Создание задачи и закрытие окна
     def create(e):
         data_job = f"{minute.value} {hour.value} {day.value} {month.value} {week.value}"
-        # Check if job with the same name already exists
         if check_job(name=name_job.value):
             ...
         else:
@@ -26,7 +21,6 @@ def open_create_new_job(page: ft.Page):
             print(f'{name_job.value}, {command_job.value}, {data_job}')
             page.close(create_new_job)
 
-    # Всплывающее окно
     create_new_job = ft.AlertDialog(
             modal=True,
             title=ft.Text("Create new job"),
