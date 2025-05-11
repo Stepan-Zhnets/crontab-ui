@@ -37,24 +37,23 @@ week = ft.TextField(
 
 data_text_field = [
     ft.Container(
-        width=100,
+        width=120,
         content=minute
     ),
     ft.Container(
-        width=100,
+        width=120,
         content=hour
     ),
     ft.Container(
-        width=100,
+        width=120,
         content=day
     ),
     ft.Container(
-        width=100,
+        width=120,
         content=month
     ),
     ft.Container(
-        width=100,
+        width=120,
         content=week
     ),
-    # ft.TextButton("Set", on_click=None)
 ]

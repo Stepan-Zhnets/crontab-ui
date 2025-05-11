@@ -1,0 +1,36 @@
+import flet as ft
+import os
+import webbrowser
+
+files = {
+    "Main list": "./manual/📍_Main_list.pdf",
+    "Create-Edit job": "./manual/📝_Create-Edit_job.pdf",
+    "Main panel": "./manual/📰_Main_panel.pdf"
+}
+
+def open_file(path):
+    webbrowser.open(os.path.abspath(path))
+
+def open_manual_list(page: ft.Page):
+    def handle_close(e):
+        page.close(manual_page)
+
+    buttons = [
+        ft.TextButton(
+            text=name,
+            on_click=lambda e,
+            p=path: open_file(p)
+        )
+        for name, path in files.items()
+    ]
+
+    manual_page = ft.AlertDialog(
+        title=ft.Text("Manuals"),
+        actions=[
+            ft.Column(buttons),
+            ft.Divider(height=9, thickness=3),
+            ft.TextButton("Cancel", on_click=handle_close),
+        ]
+    )
+
+    page.open(manual_page)
