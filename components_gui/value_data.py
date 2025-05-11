@@ -56,5 +56,4 @@ data_text_field = [
         width=120,
         content=week
     ),
-    # ft.TextButton("Set", on_click=None)
 ]

@@ -1,5 +1,5 @@
 import flet as ft
-from components_gui.table import update_table
+from components_gui import update_table
 
 # Главная страница
 def main(page: ft.Page):

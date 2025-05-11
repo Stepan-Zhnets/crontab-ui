@@ -12,7 +12,6 @@ def open_file(path):
     webbrowser.open(os.path.abspath(path))
 
 def open_manual_list(page: ft.Page):
-    # Закрытие окна
     def handle_close(e):
         page.close(manual_page)
 
@@ -27,7 +26,6 @@ def open_manual_list(page: ft.Page):
 
     manual_page = ft.AlertDialog(
         title=ft.Text("Manuals"),
-        # content=ft.Column(buttons),
         actions=[
             ft.Column(buttons),
             ft.Divider(height=9, thickness=3),

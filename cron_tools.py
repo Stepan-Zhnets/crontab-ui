@@ -2,7 +2,6 @@ from crontab import CronTab
 import croniter
 import subprocess
 
-# Get the current user's username using whoami command
 try:
     user = subprocess.check_output('whoami', shell=True).decode().strip()
 except Exception as e:
@@ -33,13 +32,11 @@ def create_job(name, date, command):
         job = cron.new(command=command, comment=name)
 
         if date in special_commands_map:
-            # Handle @reboot separately since it is not supported directly by crontab for jobs
             if date == "@reboot":
                 raise ValueError("The '@reboot' command cannot be used directly with this function. Please set up the reboot job manually.")
             else:
                 cron_command = special_commands_map[date]
         else:
-            # Validate and use the provided cron expression
             try:
                 croniter.croniter(date, "2023-01-01")
                 cron_command = date
@@ -80,8 +77,8 @@ def get_jobs():
                 "command": job.command,
                 "status": status
             })
-            print(f'"name": {job.comment}, "cron": {cron_expression}, "command": {job.command}, "status": {status}')
-    return jobs 
+            # print(f'"name": {job.comment}, "cron": {cron_expression}, "command": {job.command}, "status": {status}')
+    return jobs
 
 def update_job(name, new_name=None, new_command=None, new_date=None):
     with CronTab(user=user) as cron:
