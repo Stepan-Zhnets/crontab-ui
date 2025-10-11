@@ -6,12 +6,12 @@
   };
   outputs = { self, nixpkgs, ... }: let
     pkgs = nixpkgs.legacyPackages."x86_64-linux";
-    packageOverrides = pkgs.callPackage ./python-packages.nix {};
-    python = pkgs.python3.override { inherit packageOverrides; };
+    # packageOverrides = pkgs.callPackage ./python-packages.nix {};
+    # python = pkgs.python3.override { inherit packageOverrides; };
   in {
     devShell.x86_64-linux.default = pkgs.mkShell {
-      packages = [
-        (python.withpackages(pypkgs: with pypkgs; [
+      packages = with pkgs; [
+        (python312.withpackages(pypkgs: with pypkgs; [
           flet
           croniter
           python-crontab
